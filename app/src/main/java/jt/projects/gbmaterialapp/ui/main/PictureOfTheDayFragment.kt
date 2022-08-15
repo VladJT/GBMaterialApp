@@ -3,6 +3,7 @@ package jt.projects.gbmaterialapp.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
+import jt.projects.gbmaterialapp.util.TAG
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
 
@@ -52,6 +54,7 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        initBottomSheetListeners()
 
         binding.wikiInputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -59,6 +62,26 @@ class PictureOfTheDayFragment : Fragment() {
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.wikiInputEditText.text.toString()}")
             })
         }
+    }
+
+    private fun initBottomSheetListeners() {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> Log.d(TAG, "STATE_DRAGGING")
+                    BottomSheetBehavior.STATE_COLLAPSED -> Log.d(TAG, "STATE_COLLAPSED")
+                    BottomSheetBehavior.STATE_EXPANDED -> Log.d(TAG, "STATE_EXPANDED")
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.d(TAG, "STATE_HALF_EXPANDED")
+                    BottomSheetBehavior.STATE_HIDDEN -> Log.d(TAG, "STATE_HIDDEN")
+                    BottomSheetBehavior.STATE_SETTLING -> Log.d(TAG, "STATE_SETTLING")
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // во время скольжения !
+            }
+        })
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
