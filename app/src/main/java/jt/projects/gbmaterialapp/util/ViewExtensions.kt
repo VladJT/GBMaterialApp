@@ -1,6 +1,9 @@
 package jt.projects.gbmaterialapp.util
 
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 fun <T> View.getUniString(text: T): String {
@@ -18,7 +21,14 @@ fun <T, R> View.showSnackBarWithAction(text: T, actionText: R, action: () -> Uni
         this,
         this.getUniString(text),
         Snackbar.LENGTH_LONG
-    )// отображается неопределенное время Snackbar.LENGTH_INDEFINITE
+    )// отображается неопределенное время - Snackbar.LENGTH_INDEFINITE
         .setAction(this.getUniString(actionText)) { action.invoke() }
         .show()
+}
+
+fun Fragment.toast(string: String?) {
+    Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
+        setGravity(Gravity.BOTTOM, 0, 250)
+        show()
+    }
 }
