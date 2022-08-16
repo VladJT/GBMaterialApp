@@ -32,3 +32,7 @@ fun Fragment.toast(string: String?) {
         show()
     }
 }
+
+fun Fragment.snackBar(text: String) {
+    this.view?.let { Snackbar.make(it, text, Snackbar.LENGTH_LONG).show() }
+}

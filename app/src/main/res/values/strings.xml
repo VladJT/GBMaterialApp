@@ -6,4 +6,6 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+    <string name="std_chips">1. Default — это просто чип без каких-либо достоинств, кроме внешнего вида.\n 2. Entry меняет состояние чипа, автоматически добавляя галочку и крестик. Такой чип подойдёт для выбора опций.\n 3. Choice превращает чип в аналог checkbox.\n 4. Action делает чип нажимаемым. На него можно повесить listener и использовать, например, как овальную кнопку.\n 5. Filter явно даёт понять, что некий параметр выбран, с помощью подсветки и галочки. Продвинутая версия Choice.</string>
+    <string name="color_chips">1. chipBackgroundColor для заднего фона\n 2. rippleColor для заливки во время нажатия\n 3. chipIcon для отображения иконки</string>
 </resources>

@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import jt.projects.gbmaterialapp.MainActivity
 import jt.projects.gbmaterialapp.R
@@ -32,6 +33,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
+        private var isMain = true
     }
 
 
@@ -58,11 +60,36 @@ class PictureOfTheDayFragment : Fragment() {
 
         //fab
         binding.fab.setOnClickListener {
-            when (bottomSheetBehavior.state){
-                BottomSheetBehavior.STATE_HIDDEN -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.STATE_COLLAPSED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                else -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            if (isMain) {
+                isMain = false
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_back_fab
+                    )
+                )
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+            } else {
+                isMain = true
+                binding.bottomAppBar.navigationIcon =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_hamburger_menu_bottom_bar
+                    )
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_plus_fab
+                    )
+                )
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
+
         }
 
         binding.wikiInputLayout.setEndIconOnClickListener {
@@ -87,10 +114,26 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home->{
+        when (item.itemId) {
+            android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+            R.id.app_bar_settings ->
+                activity?.let {
+                    it.supportFragmentManager.beginTransaction()
+                        .add(R.id.container, ChipsFragment())
+                        .addToBackStack(null).commit()
+                }
+
+            R.id.app_bot_sheet_expand -> {
+                when (bottomSheetBehavior.state) {
+                    BottomSheetBehavior.STATE_HIDDEN -> bottomSheetBehavior.state =
+                        BottomSheetBehavior.STATE_EXPANDED
+                    BottomSheetBehavior.STATE_COLLAPSED -> bottomSheetBehavior.state =
+                        BottomSheetBehavior.STATE_EXPANDED
+                    else -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 }
             }
         }
