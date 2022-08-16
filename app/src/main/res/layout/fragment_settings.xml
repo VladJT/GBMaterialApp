@@ -193,14 +193,17 @@
         android:text="Вариант ChipGroup с горизонтальной прокруткой"
         android:textSize="12sp" />
 
+    <!-- С помощью contentDescription  вы можете добавлять описание для каждого элемента на экране-->
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_close"
         style="@style/Widget.MaterialComponents.Chip.Entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
         android:text="Close Icon Listener" />
+
 
 
 </LinearLayout>
