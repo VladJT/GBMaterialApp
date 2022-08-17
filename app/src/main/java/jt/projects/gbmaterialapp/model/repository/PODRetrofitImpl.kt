@@ -1,6 +1,7 @@
 package jt.projects.gbmaterialapp.model.repository
 
 import com.google.gson.GsonBuilder
+import jt.projects.gbmaterialapp.util.NASA_BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,11 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class PODRetrofitImpl {
-    private val baseUrl = "https://api.nasa.gov/"
-
     fun getRetrofitImpl(): PictureOfTheDayAPI {
         val podRetrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(NASA_BASE_URL)
             .addConverterFactory(
                 GsonConverterFactory.create(GsonBuilder().setLenient().create())
             )
@@ -33,6 +32,9 @@ class PODRetrofitImpl {
         return httpClient.build()
     }
 
+    //В библиотеку можно внедрить перехватчики для изменения заголовков при помощи класса Interceptor из OkHttp.
+    // Сначала следует создать объект перехватчика и передать его в OkHttp, который в свою очередь следует явно подключить в
+    // Retrofit.Builder через метод client().
     inner class PODInterceptor : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {

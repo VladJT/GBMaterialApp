@@ -166,11 +166,23 @@ class PictureOfTheDayFragment : Fragment() {
 
             R.id.app_bot_sheet_expand -> {
                 when (bottomSheetBehavior.state) {
-                    BottomSheetBehavior.STATE_HIDDEN -> bottomSheetBehavior.state =
-                        BottomSheetBehavior.STATE_EXPANDED
-                    BottomSheetBehavior.STATE_COLLAPSED -> bottomSheetBehavior.state =
-                        BottomSheetBehavior.STATE_EXPANDED
-                    else -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        bottomSheetBehavior.state =
+                            BottomSheetBehavior.STATE_EXPANDED
+                        item.icon =
+                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_down_24)
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        bottomSheetBehavior.state =
+                            BottomSheetBehavior.STATE_EXPANDED
+                        item.icon =
+                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_down_24)
+                    }
+                    else -> {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                        item.icon =
+                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_up_24)
+                    }
                 }
             }
         }

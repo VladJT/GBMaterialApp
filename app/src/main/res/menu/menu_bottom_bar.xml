@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/app_bot_sheet_expand"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/ic_baseline_keyboard_double_arrow_up_24"
         android:title="info"
         app:showAsAction="ifRoom" />
 
