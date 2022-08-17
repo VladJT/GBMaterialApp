@@ -9,6 +9,7 @@ import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.BottomNavigationLayoutBinding
 import jt.projects.gbmaterialapp.util.toast
 
+
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null

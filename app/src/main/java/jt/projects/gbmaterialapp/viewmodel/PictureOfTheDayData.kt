@@ -2,6 +2,7 @@ package jt.projects.gbmaterialapp.viewmodel
 
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 
+
 sealed class PictureOfTheDayData {
     data class Success(val serverResponseData: PODServerResponseData) :
         PictureOfTheDayData()

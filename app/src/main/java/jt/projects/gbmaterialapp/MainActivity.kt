@@ -7,6 +7,7 @@ import jt.projects.gbmaterialapp.ui.main.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

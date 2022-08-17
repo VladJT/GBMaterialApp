@@ -105,6 +105,7 @@ class PictureOfTheDayFragment : Fragment() {
         binding.chipToday.isChecked = true
     }
 
+
     private fun initFabListener() {
         binding.fab.setOnClickListener {
             if (isMain) {

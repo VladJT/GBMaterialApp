@@ -9,6 +9,7 @@ import com.google.android.material.chip.Chip
 import jt.projects.gbmaterialapp.databinding.FragmentSettingsBinding
 import jt.projects.gbmaterialapp.util.snackBar
 
+
 class ChipsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!

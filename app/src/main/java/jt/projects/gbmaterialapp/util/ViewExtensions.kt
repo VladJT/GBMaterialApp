@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
+
 fun <T> View.getUniString(text: T): String {
     return ((text as? Int)?.let { resources.getText(text as Int) } ?: text) as String
 }
