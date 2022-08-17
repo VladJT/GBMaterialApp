@@ -13,14 +13,17 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
 import jt.projects.gbmaterialapp.MainActivity
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.util.TAG
+import jt.projects.gbmaterialapp.util.snackBar
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
+import java.time.LocalDate
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -36,7 +39,6 @@ class PictureOfTheDayFragment : Fragment() {
         private var isMain = true
     }
 
-
     //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(PictureOfTheDayViewModel::class.java)
@@ -47,7 +49,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.getDate().observe(viewLifecycleOwner) { renderData(it) }
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -57,8 +59,53 @@ class PictureOfTheDayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         initBottomSheetListeners()
+        initFabListener()
+        initChipGroup()
+        initChipHD()
 
-        //fab
+        binding.wikiInputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.wikiInputEditText.text.toString()}")
+            })
+        }
+        setBottomAppBar()
+    }
+
+    private fun initChipHD() {
+        binding.chipPhotoHd.setOnClickListener {
+            viewModel.getDate().value?.let { renderData(it) }
+        }
+    }
+
+    private fun initChipGroup() {
+        binding.chipGroupPhotoDate.setOnCheckedStateChangeListener { group, checkedIds ->
+            snackBar("Выбран $checkedIds")
+        }
+
+        binding.chipGroupPhotoDate.setOnCheckedChangeListener { chipGroup, position ->
+            chipGroup.findViewById<Chip>(position)?.let {
+                //snackBar("Выбран ${it.text} $position")
+                when (position) {
+                    0 -> {
+                        viewModel.loadPictureOfTheDay()
+                    }
+                    1 -> {
+                        val yesterday = LocalDate.now().minusDays(1)
+                        viewModel.loadPictureOfTheDayByDate(yesterday)
+                    }
+                    2 -> {
+                        val yesterday = LocalDate.now().minusDays(2)
+                        viewModel.loadPictureOfTheDayByDate(yesterday)
+                    }
+                    else -> viewModel.loadPictureOfTheDay()
+                }
+            }
+        }
+        binding.chipToday.isChecked = true
+    }
+
+    private fun initFabListener() {
         binding.fab.setOnClickListener {
             if (isMain) {
                 isMain = false
@@ -89,17 +136,7 @@ class PictureOfTheDayFragment : Fragment() {
                 )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
-
         }
-
-        binding.wikiInputLayout.setEndIconOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data =
-                    Uri.parse("https://en.wikipedia.org/wiki/${binding.wikiInputEditText.text.toString()}")
-            })
-        }
-
-        setBottomAppBar()
     }
 
     private fun setBottomAppBar() {
@@ -173,7 +210,10 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayData.Success -> {
                 binding.loadingLayout.visibility = View.GONE
                 val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
+                var url: String?
+                if (binding.chipPhotoHd.isChecked) {
+                    url = serverResponseData.hdurl
+                } else url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
