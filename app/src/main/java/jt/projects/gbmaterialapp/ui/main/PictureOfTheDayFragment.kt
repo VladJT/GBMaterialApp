@@ -13,17 +13,16 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.chip.Chip
 import jt.projects.gbmaterialapp.MainActivity
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.util.TAG
-import jt.projects.gbmaterialapp.util.snackBar
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
 import java.time.LocalDate
+
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -79,27 +78,20 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun initChipGroup() {
-        binding.chipGroupPhotoDate.setOnCheckedStateChangeListener { group, checkedIds ->
-            snackBar("Выбран $checkedIds")
-        }
-
         binding.chipGroupPhotoDate.setOnCheckedChangeListener { chipGroup, position ->
-            chipGroup.findViewById<Chip>(position)?.let {
-                //snackBar("Выбран ${it.text} $position")
-                when (position) {
-                    0 -> {
-                        viewModel.loadPictureOfTheDay()
-                    }
-                    1 -> {
-                        val yesterday = LocalDate.now().minusDays(1)
-                        viewModel.loadPictureOfTheDayByDate(yesterday)
-                    }
-                    2 -> {
-                        val yesterday = LocalDate.now().minusDays(2)
-                        viewModel.loadPictureOfTheDayByDate(yesterday)
-                    }
-                    else -> viewModel.loadPictureOfTheDay()
+            when (chipGroup.checkedChipId) {
+                binding.chipToday.id -> {
+                    viewModel.loadPictureOfTheDay()
                 }
+                binding.chipYesterday.id -> {
+                    val yesterday = LocalDate.now().minusDays(1)
+                    viewModel.loadPictureOfTheDayByDate(yesterday)
+                }
+                binding.chipDayBeforeYesterday.id -> {
+                    val yesterday = LocalDate.now().minusDays(2)
+                    viewModel.loadPictureOfTheDayByDate(yesterday)
+                }
+                else -> viewModel.loadPictureOfTheDay()
             }
         }
         binding.chipToday.isChecked = true
