@@ -13,10 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import jt.projects.gbmaterialapp.BuildConfig
 import jt.projects.gbmaterialapp.MainActivity
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
+import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
+import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
 import jt.projects.gbmaterialapp.util.TAG
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
@@ -152,7 +155,7 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.app_bar_settings ->
                 activity?.let {
                     it.supportFragmentManager.beginTransaction()
-                        .add(R.id.container, ChipsFragment())
+                        .add(R.id.container, SettingsFragment())
                         .addToBackStack(null).commit()
                 }
 
@@ -161,19 +164,16 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         bottomSheetBehavior.state =
                             BottomSheetBehavior.STATE_EXPANDED
-                        item.icon =
-                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_down_24)
+                        setIconArrowDown()
                     }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         bottomSheetBehavior.state =
                             BottomSheetBehavior.STATE_EXPANDED
-                        item.icon =
-                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_down_24)
+                        setIconArrowDown()
                     }
                     else -> {
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                        item.icon =
-                            resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_up_24)
+                        setIconArrowUp()
                     }
                 }
             }
@@ -181,17 +181,45 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @Suppress("DEPRECATION")
+    private fun setIconArrowDown() {
+        val expand = binding.bottomAppBar.menu.findItem(R.id.app_bot_sheet_expand)
+        expand.icon = resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_down_24)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun setIconArrowUp() {
+        val expand = binding.bottomAppBar.menu.findItem(R.id.app_bot_sheet_expand)
+        expand.icon = resources.getDrawable(R.drawable.ic_baseline_keyboard_double_arrow_up_24)
+    }
+
     private fun initBottomSheetListeners() {
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                var state = ""
                 when (newState) {
-                    BottomSheetBehavior.STATE_DRAGGING -> Log.d(TAG, "STATE_DRAGGING")
-                    BottomSheetBehavior.STATE_COLLAPSED -> Log.d(TAG, "STATE_COLLAPSED")
-                    BottomSheetBehavior.STATE_EXPANDED -> Log.d(TAG, "STATE_EXPANDED")
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.d(TAG, "STATE_HALF_EXPANDED")
-                    BottomSheetBehavior.STATE_HIDDEN -> Log.d(TAG, "STATE_HIDDEN")
-                    BottomSheetBehavior.STATE_SETTLING -> Log.d(TAG, "STATE_SETTLING")
+                    BottomSheetBehavior.STATE_DRAGGING -> state = "STATE_DRAGGING"
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        state = "STATE_COLLAPSED"
+                        setIconArrowUp()
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        state = "STATE_EXPANDED"
+                        setIconArrowDown()
+                    }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                        state = "STATE_HALF_EXPANDED"
+                        setIconArrowUp()
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        state = "STATE_HIDDEN"
+                        setIconArrowUp()
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> state = "STATE_SETTLING"
+                }
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, state)
                 }
             }
 
@@ -205,9 +233,7 @@ class PictureOfTheDayFragment : Fragment() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_COLLAPSED//состояние (свёрнутое, но не скрытое)
-
     }
-
 
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {

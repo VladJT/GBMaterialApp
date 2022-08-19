@@ -1,4 +1,4 @@
-package jt.projects.gbmaterialapp.ui.main
+package jt.projects.gbmaterialapp.ui.tools
 
 import android.os.Bundle
 import android.view.LayoutInflater

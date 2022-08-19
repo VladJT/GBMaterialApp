@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ********** Виджеты *********
+    Атрибуты для изменения внешнего вида виджетов принимают стили ShapeAppearance.MaterialComponents. Также могут быть:
+    ● shapeAppearanceSmallComponent — для мелких виджетов типа кнопок и чипов;
+    ● shapeAppearanceMediumComponent — для средних виджетов типа карточек;
+    ● shapeAppearanceLargeComponent — для крупных виджетов типа Bottom Sheet.-->
+    <style name="AppShapeAppearance.SmallComponent.CutStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <!-- дизайн, похожий на iOS -->
+   <style name="AppShapeAppearance.SmallComponent.IosStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+       <item name="cornerFamily">rounded</item>
+       <item name="cornerSize">18dp</item>
+   </style>
+
+   <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+       <item name="cornerFamily">cut</item>
+       <item name="cornerSize">20dp</item>
+   </style>
+
+
+   <!-- ********** КНОПКИ *********
+   Все кнопки используют атрибут textAppearanceButton для изменения своего стиля.
+   Основные атрибуты кнопок:
+   1. backgroundTint — изменение фона кнопки.
+   2. iconTint — цвет иконки для кнопки (если она есть, и если она в векторе).
+   3. rippleColor — цвет эффекта нажатия.
+   4. strokeColor — цвет обводки кнопки. Цвет по умолчанию colorOnSurface для очерченной
+   кнопки и transparent — для всех остальных.
+   5. strokeWidth — толщина обводки.
+   6. shapeAppearance — форма. По умолчанию shapeAppearanceSmallComponent.
+   -->
+    <style name="AppButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="rippleColor">@color/gold</item>
+    </style>
+
+    <!-- ********** EditText *********
+    Вводим текст в стиле материального дизайна. EditText включает два варианта:
+    Widget.MaterialComponents.TextInputLayout.* и Widget.MaterialComponents.TextInputEditText.*.
+    Суффиксы: обычный *.FilledBox (по умолчанию) и очерченный *.OutlinedBox.
+    Основные атрибуты:
+    1. boxBackgroundMode — тип фона. Обычный, очерченный и никакого: filled, outline or none.
+    2. boxBackgroundColor — цвет фона. По умолчанию == colorOnSurface.
+    3. boxStrokeColor — цвет обводки. По умолчанию == colorOnSurface.
+    4. hintTextColor/errorTextColor/counterTextColor — цвет подсказки, ошибки, счётчика.
+    5. shapeAppearance — форма
+    -->
+    <style name="AppTextField"
+        parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/text_field_background_selector</item>
+        <item name="boxStrokeColor">@color/orange</item>
+    </style>
+
+</resources>

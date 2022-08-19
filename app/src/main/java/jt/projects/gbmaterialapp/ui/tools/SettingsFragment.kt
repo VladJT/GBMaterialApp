@@ -1,4 +1,4 @@
-package jt.projects.gbmaterialapp.ui.main
+package jt.projects.gbmaterialapp.ui.tools
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.google.android.material.chip.Chip
 import jt.projects.gbmaterialapp.databinding.FragmentSettingsBinding
 import jt.projects.gbmaterialapp.util.snackBar
 
-class ChipsFragment : Fragment() {
+class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
@@ -36,7 +36,7 @@ class ChipsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = ChipsFragment()
+        fun newInstance() = SettingsFragment()
     }
 
     override fun onDestroyView() {
