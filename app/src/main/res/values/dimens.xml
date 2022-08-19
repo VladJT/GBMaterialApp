@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_navigation_margin">8dp</dimen>
+    <dimen name="bottom_sheet_height">500dp</dimen>
+    <dimen name="bottom_sheet_peek_height">120dp</dimen>
+    <dimen name="text_view_padding_std">10dp</dimen>
+    <dimen name="margin_std_small">5dp</dimen>
+    <dimen name="padding_std">10dp</dimen>
+    <dimen name="margin_std_medium">20dp</dimen>
+</resources>

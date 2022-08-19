@@ -10,29 +10,36 @@
         <item name="cornerSize">8dp</item>
     </style>
 
-    <!-- дизайн, похожий на iOS -->
-   <style name="AppShapeAppearance.SmallComponent.IosStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-       <item name="cornerFamily">rounded</item>
-       <item name="cornerSize">18dp</item>
-   </style>
+    <style name="AppShapeAppearance.SmallComponent.MyStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeBottomRight">15dp</item>
+    </style>
 
-   <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-       <item name="cornerFamily">cut</item>
-       <item name="cornerSize">20dp</item>
-   </style>
+    <!-- iOS style -->
+    <style name="AppShapeAppearance.SmallComponent.IOSStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
 
-   <!-- ********** КНОПКИ *********
-   Все кнопки используют атрибут textAppearanceButton для изменения своего стиля.
-   Основные атрибуты кнопок:
-   1. backgroundTint — изменение фона кнопки.
-   2. iconTint — цвет иконки для кнопки (если она есть, и если она в векторе).
-   3. rippleColor — цвет эффекта нажатия.
-   4. strokeColor — цвет обводки кнопки. Цвет по умолчанию colorOnSurface для очерченной
-   кнопки и transparent — для всех остальных.
-   5. strokeWidth — толщина обводки.
-   6. shapeAppearance — форма. По умолчанию shapeAppearanceSmallComponent.
-   -->
+    <!-- ********** КНОПКИ *********
+    Все кнопки используют атрибут textAppearanceButton для изменения своего стиля.
+    Основные атрибуты:
+    1. backgroundTint — изменение фона кнопки.
+    2. iconTint — цвет иконки для кнопки (если она есть, и если она в векторе).
+    3. rippleColor — цвет эффекта нажатия.
+    4. strokeColor — цвет обводки кнопки. Цвет по умолчанию colorOnSurface для очерченной
+    кнопки и transparent — для всех остальных.
+    5. strokeWidth — толщина обводки.
+    6. shapeAppearance — форма. По умолчанию shapeAppearanceSmallComponent.
+    -->
     <style name="AppButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorSecondary</item>
         <item name="rippleColor">@color/gold</item>
@@ -49,10 +56,46 @@
     4. hintTextColor/errorTextColor/counterTextColor — цвет подсказки, ошибки, счётчика.
     5. shapeAppearance — форма
     -->
-    <style name="AppTextField"
-        parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@color/text_field_background_selector</item>
         <item name="boxStrokeColor">@color/orange</item>
+    </style>
+
+    <!-- ********** Карточки *********
+    Карточки в Material Design считаются «поверхностями» (surface) и наследуются от Widget.MaterialComponents.CardView.
+    Основные атрибуты:
+    1. cardBackgroundColor — цвет фона. По умолчанию colorSurface.
+    2. cardElevation — тень. По умолчанию 1dp.
+    3. shapeAppearance — форма. По умолчанию shapeAppearanceMediumComponent.
+    -->
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">20dp</item>
+    </style>
+
+    <!-- ********** BottomNavigationView *********
+    Нижняя навигация состоит из двух основных элементов, наследующих
+    Widget.MaterialComponents.BottomNavigationView с дополнительными суффиксами: surface (по
+    умолчанию нет суффикса) и colored (*.Colored). Текстовые заголовки можно менять через атрибут
+    textAppearanceCaption, который принимает стили типографии.
+    Основные атрибуты:
+    1. backgroundTint — цвет фона. Цвет по умолчанию: colorSurface и colorPrimary для colored;
+    2. itemTextColor/itemIconTint — цвет иконок и заголовков. Цвета по умолчанию:
+    colorOnSurface/colorPrimary (при выбранном);
+    3. itemHorizontalTranslationEnabled — флаг, решающий, будет ли анимация при
+    перелистывании. По умолчанию == false.
+    -->
+
+    <style name="bottom_sheet_line">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:background">#663b4351</item>
+    </style>
+
+    <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearance">
+            @style/AppShapeAppearance.SmallComponent.MyStyle
+        </item>
     </style>
 
 </resources>
