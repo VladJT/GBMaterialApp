@@ -152,6 +152,9 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                 }
             }
+
+            R.id.app_bar_theme -> (activity as MainActivity).showThemeDialog()
+
             R.id.app_bar_settings ->
                 activity?.let {
                     it.supportFragmentManager.beginTransaction()
@@ -180,6 +183,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     @Suppress("DEPRECATION")
     private fun setIconArrowDown() {

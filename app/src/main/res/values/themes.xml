@@ -32,7 +32,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">?themeColorPrimary</item>
-        <item name="textColorConnected">@color/green</item>
+        <item name="textColorConnected">@color/gray</item>
         <item name="textColorDisConnected">@color/light_gray</item>
         <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.MediumComponent</item>
         <item name="materialButtonStyle">@style/AppButton</item>
@@ -41,25 +41,32 @@
         <item name="android:forceDarkAllowed">true</item>
     </style>
 
-
-    <style name="AppTheme.IndigoTheme">
-        <item name="themeColorPrimary">@color/indigo</item>
-        <item name="colorPrimaryDark">@color/indigo_dark</item>
-        <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:textColorSecondary">@color/gray</item>
-        <item name="colorAccent">@color/pink_dark</item>
-        <item name="textColorConnected">@color/green</item>
-        <item name="textColorDisConnected">@color/light_gray</item>
+    <style name="AppTheme.CutTheme">
+        <item name="themeColorPrimary">@color/pink_light</item>
+        <item name="colorSecondary">#a98274</item>
+        <item name="shapeAppearanceSmallComponent">
+            @style/AppShapeAppearance.SmallComponent.CutStyle
+        </item>
         <item name="fontFamily">@font/beer</item>
     </style>
 
-    <style name="AppTheme.PinkTheme">
-        <item name="themeColorPrimary">@color/pink</item>
-        <item name="colorPrimaryVariant">@color/pink_dark</item>
-        <item name="colorSecondary">@color/pink_light</item>
-        <item name="colorSecondaryVariant">@color/pink_light</item>
-        <item name="colorOnSecondary">@color/pink_light</item>
-        <item name="textColorConnected">@color/green</item>
-        <item name="textColorDisConnected">@color/light_gray</item>
+    <style name="AppTheme.IosTheme">
+
+        !-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_500</item>
+        <item name="colorPrimaryVariant">@color/green_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="themeColorPrimary">@color/green_900</item>
+        <item name="textColorConnected">@color/green_900</item>
+        <item name="shapeAppearanceSmallComponent">
+            @style/AppShapeAppearance.SmallComponent.IOSStyle
+        </item>
+        <item name="fontFamily">@font/playfair</item>
     </style>
 </resources>

@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:background="@color/white"
+                android:background="?android:windowBackground"
                 android:contentDescription="@string/photo_of_the_day_stub"
                 android:scaleType="centerInside"
                 app:layout_constraintStart_toStartOf="parent"

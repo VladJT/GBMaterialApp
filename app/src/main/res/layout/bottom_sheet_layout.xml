@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_height"
-    android:background="#f6f6fa"
+    android:background="?android:windowBackground"
     app:behavior_hideable="true"
     app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/margin_std_small"
         android:paddingStart="@dimen/text_view_padding_std"
         android:paddingEnd="@dimen/text_view_padding_std"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

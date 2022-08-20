@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="choose_notes_theme">
+        <item>AstroNews (standart)</item>
+        <item>MercuryStyle (Cut)</item>
+        <item>MarsStyle (Rounded)</item>
+    </string-array>
+
+</resources>
