@@ -2,5 +2,6 @@
 <resources>
     <attr name="textColorConnected" format="reference" />
     <attr name="textColorDisconnected" format="reference" />
-    <attr name="themeColorPrimary" format="reference" />
+    <attr name="smallComponentShape" format="reference" />
+    <attr name="mediumComponentShape" format="reference" />
 </resources>

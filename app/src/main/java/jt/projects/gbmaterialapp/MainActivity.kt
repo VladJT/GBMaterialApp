@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 when (which) {
                     0 -> newTheme = R.style.AppTheme_GBMaterialApp
                     1 -> newTheme = R.style.AppTheme_CutTheme
-                    2 -> newTheme = R.style.AppTheme_IosTheme
+                    2 -> newTheme = R.style.AppTheme_RoundedTheme
                 }
                 if (SharedPref.getData().theme != newTheme) {
                     SharedPref.settings.theme = newTheme

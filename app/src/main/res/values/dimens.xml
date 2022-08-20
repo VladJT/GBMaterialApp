@@ -7,4 +7,7 @@
     <dimen name="margin_std_small">5dp</dimen>
     <dimen name="padding_std">10dp</dimen>
     <dimen name="margin_std_medium">20dp</dimen>
+    <dimen name="progress_bar_diameter_big">80dp</dimen>
+    <dimen name="progress_bar_diameter_small">60dp</dimen>
+    <dimen name="fab_cradle_rounded_corner_radius">10dp</dimen>
 </resources>

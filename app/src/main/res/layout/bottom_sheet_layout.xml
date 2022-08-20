@@ -12,7 +12,7 @@
 
     <View
         android:id="@+id/bottomSheetLine"
-        style="@style/bottom_sheet_line"
+        style="@style/MyApp.BottomSheetLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
