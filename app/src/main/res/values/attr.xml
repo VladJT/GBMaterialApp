@@ -4,4 +4,5 @@
     <attr name="textColorDisconnected" format="reference" />
     <attr name="smallComponentShape" format="reference" />
     <attr name="mediumComponentShape" format="reference" />
+    <attr name="largeComponentShape" format="reference" />
 </resources>

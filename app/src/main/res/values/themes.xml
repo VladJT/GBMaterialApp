@@ -30,15 +30,18 @@
     ● android:colorBackground — цвет под всеми цветами.
     -->
 
+
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="textColorConnected">@color/purple_200</item>
         <item name="textColorDisconnected">@color/gray</item>
         <item name="shapeAppearanceSmallComponent">?smallComponentShape</item>
         <item name="shapeAppearanceMediumComponent">?mediumComponentShape</item>
+        <item name="shapeAppearanceLargeComponent">?largeComponentShape</item>
         <item name="materialButtonStyle">@style/MyApp.Button</item>
         <item name="materialCardViewStyle">@style/MyApp.Card</item>
         <item name="android:forceDarkAllowed">true</item>
     </style>
+
 
     <!-- MarsStyle (Cut) -->
     <style name="AppTheme.Mars">
@@ -54,6 +57,7 @@
         <item name="colorOnSecondary">@color/mars.secondaryColor</item>
         <item name="smallComponentShape">@style/MyApp.ShapeAppearance.SmallComponent.Cut</item>
         <item name="mediumComponentShape">@style/MyApp.ShapeAppearance.MediumComponent.Cut</item>
+        <item name="largeComponentShape">@style/MyApp.ShapeAppearance.LargeComponent.Cut</item>
         <item name="fontFamily">@font/beer</item>
         <item name="android:fontFamily">@font/beer</item>
     </style>
@@ -73,6 +77,7 @@
         <item name="colorOnSecondary">@color/neptune.secondaryColor</item>
         <item name="smallComponentShape">@style/MyApp.ShapeAppearance.SmallComponent.Rounded</item>
         <item name="mediumComponentShape">@style/MyApp.ShapeAppearance.MediumComponent.Rounded</item>
+        <item name="largeComponentShape">@style/MyApp.ShapeAppearance.LargeComponent.Rounded</item>
         <item name="fontFamily">@font/playfair</item>
         <item name="android:fontFamily">@font/playfair</item>
     </style>

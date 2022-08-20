@@ -19,7 +19,7 @@
 
     <style name="MyApp.ShapeAppearance.SmallComponent.Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">18dp</item>
+        <item name="cornerSize">30dp</item>
     </style>
 
     <style name="MyApp.ShapeAppearance.MediumComponent.Cut" parent="ShapeAppearance.MaterialComponents.MediumComponent">
@@ -32,6 +32,15 @@
         <item name="cornerSize">20dp</item>
     </style>
 
+    <style name="MyApp.ShapeAppearance.LargeComponent.Cut" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="MyApp.ShapeAppearance.LargeComponent.Rounded" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
     <!-- ********** КНОПКИ *********
     Все кнопки используют атрибут textAppearanceButton для изменения своего стиля.
@@ -47,6 +56,7 @@
     <style name="MyApp.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorSecondary</item>
         <item name="rippleColor">@color/gold</item>
+        <item name="strokeWidth">2dp</item>
     </style>
 
     <!-- ********** EditText *********
