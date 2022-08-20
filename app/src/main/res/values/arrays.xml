@@ -2,9 +2,9 @@
 <resources>
 
     <string-array name="choose_notes_theme">
-        <item>AstroNews (standart)</item>
-        <item>MercuryStyle (Cut)</item>
-        <item>MarsStyle (Rounded)</item>
+        <item>Astro (default_theme)</item>
+        <item>Mars (Cut_style)</item>
+        <item>Mercury (Rounded_style)</item>
     </string-array>
 
 </resources>

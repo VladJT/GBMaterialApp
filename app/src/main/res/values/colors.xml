@@ -30,4 +30,12 @@
     <color name="green_500">#4CAF50</color>
     <color name="green_700">#388E3C</color>
     <color name="teal_200">#80CBC4</color>
+    <color name="mars.primaryColor">#ef9a9a</color>
+    <color name="mars.primaryLightColor">#ffcccb</color>
+    <color name="mars.primaryDarkColor">#ba6b6c</color>
+    <color name="mars.secondaryColor">#795548</color>
+    <color name="mars.secondaryLightColor">#a98274</color>
+    <color name="mars.secondaryDarkColor">#4b2c20</color>
+    <color name="mars.primaryTextColor">#000000</color>
+    <color name="mars.secondaryTextColor">#ffffff</color>
 </resources>
