@@ -36,7 +36,6 @@
         <item name="shapeAppearanceSmallComponent">?smallComponentShape</item>
         <item name="shapeAppearanceMediumComponent">?mediumComponentShape</item>
         <item name="materialButtonStyle">@style/MyApp.Button</item>
-        <item name="textInputStyle">@style/MyApp.TextInputLayout</item>
         <item name="materialCardViewStyle">@style/MyApp.Card</item>
         <item name="android:forceDarkAllowed">true</item>
     </style>
@@ -56,6 +55,7 @@
         <item name="smallComponentShape">@style/MyApp.ShapeAppearance.SmallComponent.Cut</item>
         <item name="mediumComponentShape">@style/MyApp.ShapeAppearance.MediumComponent.Cut</item>
         <item name="fontFamily">@font/beer</item>
+        <item name="android:fontFamily">@font/beer</item>
     </style>
 
 
@@ -74,5 +74,6 @@
         <item name="smallComponentShape">@style/MyApp.ShapeAppearance.SmallComponent.Rounded</item>
         <item name="mediumComponentShape">@style/MyApp.ShapeAppearance.MediumComponent.Rounded</item>
         <item name="fontFamily">@font/playfair</item>
+        <item name="android:fontFamily">@font/playfair</item>
     </style>
 </resources>
