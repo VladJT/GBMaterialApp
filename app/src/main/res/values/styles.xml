@@ -62,7 +62,7 @@
     -->
     <style name="MyApp.TextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@color/text_field_background_selector</item>
-        <item name="boxStrokeColor">@color/orange</item>
+        <item name="boxStrokeColor">@android:color/holo_orange_light</item>
     </style>
 
     <!-- ********** Карточки *********

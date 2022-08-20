@@ -3,5 +3,5 @@
     <item android:alpha="0.16" android:color="@color/gray" android:state_hovered="true" />
     <item android:alpha="0.04" android:color="@color/gold" android:state_enabled="false" />
     <item android:alpha="0.04" android:color="@color/purple_200" android:state_enabled="true" />
-    <item android:alpha="0.12" android:color="@color/articlecolor" />
+    <item android:alpha="0.12" android:color="@color/teal_700" />
 </selector>

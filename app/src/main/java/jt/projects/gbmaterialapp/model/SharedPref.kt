@@ -39,6 +39,6 @@ class SharedPref {
 
     // класс хранения настроек в формате JSON
     data class Settings(
-        var theme: Int = R.style.AppTheme_GBMaterialApp //default
+        var theme: Int = R.style.GBMaterialApp //default
     )
 }
