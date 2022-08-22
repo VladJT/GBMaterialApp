@@ -5,6 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -21,7 +24,6 @@ import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
 import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
 import jt.projects.gbmaterialapp.util.TAG
-import jt.projects.gbmaterialapp.util.snackBar
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
@@ -252,7 +254,9 @@ class PictureOfTheDayFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
-                    if(serverResponseData.mediaType=="image") {
+                    if (serverResponseData.mediaType == "image") {
+                        binding.imageView.visibility = View.VISIBLE
+                        binding.webview.visibility = View.INVISIBLE
                         //Coil в работе: достаточно вызвать у нашего ImageView нужную extension - функцию и передать ссылку на изображение
                         //а в лямбде указать дополнительные параметры (не обязательно) для отображения ошибки, процесса загрузки, анимации смены изображений
                         binding.imageView.load(url) {
@@ -262,10 +266,21 @@ class PictureOfTheDayFragment : Fragment() {
                             crossfade(true)
                         }
                     }
-                    if(serverResponseData.mediaType=="video"){
-                        snackBar("Это видео!")
+                    if (serverResponseData.mediaType == "video") {
+                        binding.imageView.visibility = View.INVISIBLE
+                        binding.webview.visibility = View.VISIBLE
+                        serverResponseData.url?.let {
+                            binding.webview.apply {
+                                webViewClient = WebViewClient()
+                                settings.javaScriptEnabled = true
+                                settings.javaScriptCanOpenWindowsAutomatically = true
+                                settings.pluginState = WebSettings.PluginState.ON
+                                settings.mediaPlaybackRequiresUserGesture = false
+                                webChromeClient = WebChromeClient()
+                            }.loadUrl(it)
+                        }
                     }
-                    renderBottomSheet(serverResponseData)
+                    renderBottomSheet(serverResponseData)// загрузка описания в bottom_sheet
                 }
             }
             is PictureOfTheDayData.Loading -> {
