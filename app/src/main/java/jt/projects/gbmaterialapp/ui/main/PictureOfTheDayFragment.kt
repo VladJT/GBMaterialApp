@@ -21,6 +21,7 @@ import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
 import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
 import jt.projects.gbmaterialapp.util.TAG
+import jt.projects.gbmaterialapp.util.snackBar
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
@@ -251,13 +252,18 @@ class PictureOfTheDayFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
-                    //Coil в работе: достаточно вызвать у нашего ImageView нужную extension - функцию и передать ссылку на изображение
-                    //а в лямбде указать дополнительные параметры (не обязательно) для отображения ошибки, процесса загрузки, анимации смены изображений
-                    binding.imageView.load(url) {
-                        lifecycle(this@PictureOfTheDayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-                        crossfade(true)
+                    if(serverResponseData.mediaType=="image") {
+                        //Coil в работе: достаточно вызвать у нашего ImageView нужную extension - функцию и передать ссылку на изображение
+                        //а в лямбде указать дополнительные параметры (не обязательно) для отображения ошибки, процесса загрузки, анимации смены изображений
+                        binding.imageView.load(url) {
+                            lifecycle(this@PictureOfTheDayFragment)
+                            error(R.drawable.ic_load_error_vector)
+                            placeholder(R.drawable.ic_no_photo_vector)
+                            crossfade(true)
+                        }
+                    }
+                    if(serverResponseData.mediaType=="video"){
+                        snackBar("Это видео!")
                     }
                     renderBottomSheet(serverResponseData)
                 }
