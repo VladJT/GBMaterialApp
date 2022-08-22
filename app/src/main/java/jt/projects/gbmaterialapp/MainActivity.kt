@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import jt.projects.gbmaterialapp.databinding.ActivityMainBinding
 import jt.projects.gbmaterialapp.model.SharedPref
 import jt.projects.gbmaterialapp.ui.main.PictureOfTheDayFragment
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
             .setTitle("Выбор темы")
             .setItems(items) { _, which ->
                 var newTheme = 0
-                when (which) {
-                    0 -> newTheme = R.style.GBMaterialApp
-                    1 -> newTheme = R.style.AppTheme_Mars
-                    2 -> newTheme = R.style.AppTheme_Neptune
+                when (items[which]) {
+                    "Astro (default_theme)" -> newTheme = R.style.GBMaterialApp
+                    "Mars (Cut_style)" -> newTheme = R.style.AppTheme_Mars
+                    "Mercury (Rounded_style)" -> newTheme = R.style.AppTheme_Neptune
                 }
                 if (SharedPref.getData().theme != newTheme) {
                     SharedPref.settings.theme = newTheme
