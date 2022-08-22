@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">GBMaterialApp</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
     <string name="search_wiki">Найти в Википедии</string>

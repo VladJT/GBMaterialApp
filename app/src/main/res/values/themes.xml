@@ -62,7 +62,6 @@
         <item name="android:fontFamily">@font/beer</item>
     </style>
 
-
     <!-- Mercury (Rounded_style) -->
     <style name="AppTheme.Neptune">
         <item name="colorPrimary">@color/neptune.primaryColor</item>

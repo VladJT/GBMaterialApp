@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     fun showThemeDialog() {
         val items = resources.getStringArray(R.array.choose_notes_theme)
         // Создаём билдер и передаём контекст приложения

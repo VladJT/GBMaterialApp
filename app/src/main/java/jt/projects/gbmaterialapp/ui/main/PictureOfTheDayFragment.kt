@@ -80,6 +80,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+
     private fun initChipGroup() {
         binding.chipGroupPhotoDate.setOnCheckedChangeListener { chipGroup, position ->
             when (chipGroup.checkedChipId) {

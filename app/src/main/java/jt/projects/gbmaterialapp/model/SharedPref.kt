@@ -9,6 +9,7 @@ import jt.projects.gbmaterialapp.R
 private const val SP_DB_NAME = "settings"
 private const val SP_DB_KEY = "ALL_SETTINGS_IN_JSON_FORMAT"
 
+
 class SharedPref {
     companion object {
         lateinit var settings: Settings

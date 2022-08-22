@@ -59,6 +59,7 @@
         <item name="strokeWidth">2dp</item>
     </style>
 
+
     <!-- ********** EditText *********
     Вводим текст в стиле материального дизайна. EditText включает два варианта:
     Widget.MaterialComponents.TextInputLayout.* и Widget.MaterialComponents.TextInputEditText.*.
