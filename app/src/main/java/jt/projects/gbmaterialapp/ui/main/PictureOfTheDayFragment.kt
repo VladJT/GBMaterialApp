@@ -23,10 +23,12 @@ import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
 import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
+import jt.projects.gbmaterialapp.ui.viewpager.ViewPagerActivity
 import jt.projects.gbmaterialapp.util.TAG
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
+import jt.projects.gbmaterialapp.viewmodel.ViewPagerAdapter
 import java.time.LocalDate
 
 
@@ -154,6 +156,10 @@ class PictureOfTheDayFragment : Fragment() {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                 }
+            }
+
+            R.id.app_bar_fav -> {
+                activity?.let {startActivity(Intent(it, ViewPagerActivity::class.java))}
             }
 
             R.id.app_bar_theme -> (activity as MainActivity).showThemeDialog()
