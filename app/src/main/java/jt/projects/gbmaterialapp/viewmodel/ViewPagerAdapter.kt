@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import jt.projects.gbmaterialapp.ui.viewpager.EarthFragment
 import jt.projects.gbmaterialapp.ui.viewpager.MarsFragment
 import jt.projects.gbmaterialapp.ui.viewpager.WeatherFragment
+import jt.projects.gbmaterialapp.util.*
 
 //Адаптер наследуется от класса FragmentStatePagerAdapter. На самом деле есть два вида адаптеров
 //для ViewPager: FragmentStatePagerAdapter и FragmentPagerAdapter. Основная разница между ними:
@@ -38,10 +39,14 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) :
         }
     }
 
-    companion object {
-        private const val EARTH_FRAGMENT = 0
-        private const val MARS_FRAGMENT = 1
-        private const val WEATHER_FRAGMENT = 2
+    //
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when (position) {
+            EARTH_FRAGMENT -> "Earth"
+            MARS_FRAGMENT -> "Mars"
+            WEATHER_FRAGMENT -> "Weather"
+            else -> "Earth"
+        }
     }
 
 }

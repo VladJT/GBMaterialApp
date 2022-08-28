@@ -8,21 +8,38 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
+
         app:layout_constraintBottom_toTopOf="@+id/indicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--Самый простой способ добавить вкладки — это вписать TabLayout
+        (по аналогии с PagerTabStrip) во ViewPager-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill" />
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+    />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
-        android:background="#A69D9D"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:ci_height="5dp"
-        app:ci_width="5dp"
-        app:ci_gravity="center"
-        app:ci_orientation="horizontal"
         android:layout_gravity="center_horizontal|bottom"
+        android:background="#A69D9D"
+        app:ci_gravity="center"
+        app:ci_height="5dp"
+        app:ci_orientation="horizontal"
+        app:ci_width="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
