@@ -25,8 +25,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.viewpager.ViewPagerActivity"
-            />
+        <activity android:name=".ui.viewpager.ViewPagerActivity"/>
+        <activity android:name=".ui.telescope.BottomNavigationActivity"/>
     </application>
 
 </manifest>

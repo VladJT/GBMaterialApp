@@ -1,51 +1,33 @@
 package jt.projects.gbmaterialapp.viewmodel
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import jt.projects.gbmaterialapp.ui.viewpager.EarthFragment
 import jt.projects.gbmaterialapp.ui.viewpager.MarsFragment
 import jt.projects.gbmaterialapp.ui.viewpager.WeatherFragment
-import jt.projects.gbmaterialapp.util.*
+import jt.projects.gbmaterialapp.util.EARTH_FRAGMENT
+import jt.projects.gbmaterialapp.util.MARS_FRAGMENT
+import jt.projects.gbmaterialapp.util.WEATHER_FRAGMENT
 
-//Адаптер наследуется от класса FragmentStatePagerAdapter. На самом деле есть два вида адаптеров
-//для ViewPager: FragmentStatePagerAdapter и FragmentPagerAdapter. Основная разница между ними:
-//StateAdapter создаёт и уничтожает фрагменты в процессе перемотки (по аналогии с RecyclerView), а
-//простой адаптер держит все фрагменты в памяти.
-//Первый способ потребляет мало памяти телефона, но нагружает систему постоянным созданием
-//фрагментов. Второй способ не нагружает систему, но потребляет тем больше памяти, чем больше
-//фрагментов у вас во ViewPager. То есть если у вас приложение в виде книги или календаря, вам
-//имеет смысл создавать новые экраны динамически и уничтожать просмотренные. Если у вас всего
-//три экрана, то лучше просто создать их один раз
-//И ещё одно замечание: простой адаптер при пролистывании уничтожает только XML-layout, но не
-//сам фрагмент (onCreateView/onDestroyView), второй адаптер только хранит
-//savedInstanceState. Учитывайте этот нюанс в работе.
 
-class ViewPagerAdapter(fragmentManager: FragmentManager) :
-    FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+// конструктор мы теперь передаем корневую Активити (или фрагмент), хотя
+//можно передавать FragmentManager вместе с Lifecycle, но первый способ предпочтительнее
+class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
 
     private val fragments = arrayOf(EarthFragment(), MarsFragment(), WeatherFragment())
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return fragments.size
     }
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> fragments[EARTH_FRAGMENT]
             1 -> fragments[MARS_FRAGMENT]
             2 -> fragments[WEATHER_FRAGMENT]
             else -> fragments[EARTH_FRAGMENT]
-        }
-    }
-
-    //
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            EARTH_FRAGMENT -> "Earth"
-            MARS_FRAGMENT -> "Mars"
-            WEATHER_FRAGMENT -> "Weather"
-            else -> "Earth"
         }
     }
 

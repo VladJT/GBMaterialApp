@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_view_earth"
+        android:icon="@drawable/ic_no_photo_vector"
+        android:title="Earth" />
+    <item
+        android:id="@+id/bottom_view_mars"
+        android:icon="@drawable/ic_baseline_invert_colors_24"
+        android:title="Mars" />
+    <item
+        android:id="@+id/bottom_view_weather"
+        android:icon="@drawable/swipe_indicator_active"
+        android:title="Weather" />
+
+</menu>
