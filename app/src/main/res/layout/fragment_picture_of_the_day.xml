@@ -136,6 +136,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/behaviourButton"
+        android:text="Behavior button"
+        app:layout_behavior=".ui.main.MyBehaviour"
+         />
     <!-- Обязательно в CoordinatorLayout -->
     <include layout="@layout/bottom_sheet_layout" />
 
