@@ -82,6 +82,7 @@
                 app:layout_constraintTop_toTopOf="@+id/chipGroup_photo_date"
                 app:rippleColor="@android:color/holo_orange_dark" />
 
+
             <jt.projects.gbmaterialapp.util.EquilateralImageView
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
@@ -89,7 +90,9 @@
                 android:contentDescription="@string/photo_of_the_day_stub"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroup_photo_date"
-                app:srcCompat="@drawable/ic_no_photo_vector" />
+                app:srcCompat="@drawable/ic_no_photo_vector"
+                app:layout_wrapBehaviorInParent="included"
+                />
 
 
             <WebView
@@ -137,12 +140,11 @@
     </androidx.core.widget.NestedScrollView>
 
     <Button
+        android:id="@+id/behaviourButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/behaviourButton"
         android:text="Behavior button"
-        app:layout_behavior=".ui.main.MyBehaviour"
-         />
+        app:layout_behavior=".ui.main.ButtonBehavior" />
     <!-- Обязательно в CoordinatorLayout -->
     <include layout="@layout/bottom_sheet_layout" />
 
