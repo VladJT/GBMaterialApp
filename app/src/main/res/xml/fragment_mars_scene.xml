@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@layout/fragment_mars_end"
+        motion:constraintSetStart="@layout/fragment_mars"
+        motion:duration="1000">
+        <OnClick motion:targetId="@id/btn1" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetStart="@layout/fragment_mars_end"
+        motion:constraintSetEnd="@layout/fragment_mars"
+        motion:duration="1000">
+        <OnClick motion:targetId="@id/btn2" />
+    </Transition>
+</MotionScene>
