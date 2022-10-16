@@ -1,17 +1,20 @@
 package jt.projects.gbmaterialapp
 
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import jt.projects.gbmaterialapp.databinding.ActivityMainBinding
 import jt.projects.gbmaterialapp.model.SharedPref
 import jt.projects.gbmaterialapp.ui.main.PictureOfTheDayFragment
 
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    //@Inject
+    //lateinit var cat : Cat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance())
                 .commitNow()
         }
+      //  val car = DaggerCarsComponent.builder().build().getCar()
+       // Log.d(TAG, car.getType())
     }
 
     fun showThemeDialog() {
