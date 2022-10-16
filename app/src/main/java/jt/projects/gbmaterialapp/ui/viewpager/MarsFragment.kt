@@ -9,6 +9,7 @@ import jt.projects.gbmaterialapp.R
 
 class MarsFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
