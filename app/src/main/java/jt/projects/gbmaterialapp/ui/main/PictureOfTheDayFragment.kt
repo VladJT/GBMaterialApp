@@ -21,6 +21,7 @@ import jt.projects.gbmaterialapp.MainActivity
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
+import jt.projects.gbmaterialapp.ui.recycler.RecViewActivity
 import jt.projects.gbmaterialapp.ui.telescope.BottomNavigationActivity
 import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
 import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
@@ -156,6 +157,12 @@ class PictureOfTheDayFragment : Fragment() {
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+
+            R.id.app_bar_bottom_rec_view -> {
+                activity?.let {
+                    startActivity(Intent(it, RecViewActivity::class.java))
                 }
             }
 
