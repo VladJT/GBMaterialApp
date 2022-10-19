@@ -1,7 +1,8 @@
 package jt.projects.gbmaterialapp.ui.recycler
 
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -9,16 +10,41 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.ui.recycler.Data.Companion.TYPE_EARTH
-import jt.projects.gbmaterialapp.ui.recycler.Data.Companion.TYPE_HEADER
 import jt.projects.gbmaterialapp.ui.recycler.Data.Companion.TYPE_MARS
+
+
+//Наш адаптер имплементирует ItemTouchHelperAdapter для управления элементами через
+//вспомогательные класс . onItemMove будет вызываться, когда элемент списка будет
+//перетянут на достаточное расстояние, чтобы запустить анимацию перемещения. onItemDismiss
+//будет вызываться во время свайпа по элементу.
+//Также имплементируем интерфейс ItemTouchHelperViewHolder в нашем ViewHolder, чтобы
+//управлять элементами через тот же вспомогательный класс: onItemSelected будет вызываться в
+//процессе смахивания или перетаскивания элемента, onItemClear — когда этот процесс закончится.
+interface ItemTouchHelperAdapter {
+    fun onItemMove(fromPosition: Int, toPosition: Int)
+    fun onItemDismiss(position: Int)
+}
+
+interface ItemTouchHelperViewHolder {
+    fun onItemSelected()
+    fun onItemClear()
+}
+
+//  для перетаскивания за "ручку"
+interface OnStartDragListener {
+    fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
+}
+
+
 
 class RecyclerActivityAdapter(
     private var onListItemClickListener: OnListItemClickListener,
-    private var data: MutableList<Data>
-) : RecyclerView.Adapter<BaseViewHolder>() {
+    private val dragListener: OnStartDragListener, //  для перетаскивания за "ручку"
+    private var data: MutableList<Pair<Data, Boolean>>
+) : RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_EARTH -> EarthViewHolder(
@@ -27,63 +53,168 @@ class RecyclerActivityAdapter(
             )
             TYPE_MARS ->
                 MarsViewHolder(
-                    inflater.inflate(R.layout.activity_recycler_item_mars, parent,
-                        false) as View
+                    inflater.inflate(
+                        R.layout.activity_recycler_item_mars, parent,
+                        false
+                    ) as View
                 )
             else -> HeaderViewHolder(
-                inflater.inflate(R.layout.activity_recycler_item_header, parent,
-                    false) as View
+                inflater.inflate(
+                    R.layout.activity_recycler_item_header, parent,
+                    false
+                ) as View
             )
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun appendItem() {
         data.add(generateItem())
-        notifyDataSetChanged()
+        notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem() = Data(TYPE_MARS, "Mars", "")
+
+    private fun generateItem() = Pair(Data(TYPE_MARS, "Mars", ""), false)
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bind(data[position])
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty())
+            super.onBindViewHolder(holder, position, payloads)
+        else {
+            if (payloads.any { it is Pair<*, *> })
+                holder.itemView.findViewById<TextView>(R.id.marsTextView).text =
+                    data[position].first.someText
+        }
+    }
+
+
     override fun getItemCount(): Int {
         return data.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return data[position].type
+        return data[position].first.type
     }
 
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data, Boolean>) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.findViewById<TextView>(R.id.descriptionTextView).text =
-                    data.someDescription
+                    data.first.someDescription
                 itemView.findViewById<ImageView>(R.id.wikiImageView).setOnClickListener {
-                    onListItemClickListener.onItemClick(data)
+                    onListItemClickListener.onItemClick(data.first)
                 }
             }
         }
     }
 
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+        override fun bind(data: Pair<Data, Boolean>) {
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
-                onListItemClickListener.onItemClick(data)
+                onListItemClickListener.onItemClick(data.first)
             }
+            itemView.findViewById<ImageView>(R.id.addItemImageView).setOnClickListener {
+                addItem()
+            }
+            itemView.findViewById<ImageView>(R.id.removeItemImageView).setOnClickListener {
+                removeItem()
+            }
+            itemView.findViewById<ImageView>(R.id.moveItemDown).setOnClickListener {
+                moveDown()
+            }
+            itemView.findViewById<ImageView>(R.id.moveItemUp).setOnClickListener {
+                moveUp()
+            }
+            itemView.findViewById<TextView>(R.id.marsDescriptionTextView).visibility =
+                if (data.second) View.VISIBLE else View.GONE
+            itemView.findViewById<TextView>(R.id.marsTextView).setOnClickListener {
+                toggleText()
+            }
+
+
+            //  для перетаскивания за "ручку"
+            itemView.findViewById<ImageView>(R.id.dragHandleImageView).setOnTouchListener{ _, event ->
+                if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                    dragListener.onStartDrag(this)
+                }
+                false
+            }
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+
+        private fun toggleText() {
+            val newP  : Pair<Data,Boolean> = Pair(data[layoutPosition].first, !data[layoutPosition].second)
+            data[layoutPosition] = newP
+            notifyItemChanged(layoutPosition)
+        }
+
+
+        private fun moveUp() {
+            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition - 1, this)
+                }
+                // вызываем метод notifyItemMoved с аргументами: текущая позиция,
+                //желаемая позиция. Анимацию перемещения элемента берёт на себя RecyclerView.
+                notifyItemMoved(currentPosition, currentPosition - 1)
+            }
+        }
+
+        private fun moveDown() {
+            layoutPosition.takeIf { it < data.size - 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
+            }
+        }
+
+        private fun addItem() {
+            data.add(layoutPosition, generateItem())
+            notifyItemInserted(layoutPosition)
+        }
+
+        private fun removeItem() {
+            data.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
         }
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
-            itemView.findViewById<TextView>(R.id.header).text = data.someText
+        override fun bind(dataItem: Pair<Data, Boolean>) {
+            itemView.setOnClickListener {
+                // onListItemClickListener.onItemClick(data.first)
+                data[1] = Pair(Data(TYPE_MARS, "Jupiter", ""), false)
+                notifyItemChanged(1, Pair(Data(TYPE_MARS, "", ""), false))
+            }
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        data.removeAt(fromPosition).apply {
+            data.add(if (toPosition > fromPosition) toPosition - 1 else toPosition,
+                this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+    override fun onItemDismiss(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 }
