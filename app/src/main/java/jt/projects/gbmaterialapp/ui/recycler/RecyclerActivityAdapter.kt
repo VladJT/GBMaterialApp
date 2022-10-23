@@ -73,7 +73,7 @@ class RecyclerActivityAdapter(
     }
 
 
-    private fun generateItem() = Pair(Data(TYPE_MARS, "Mars", ""), false)
+    private fun generateItem() = Pair(Data( TYPE_MARS, "Mars", ""), false)
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {

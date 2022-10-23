@@ -1,6 +1,7 @@
 package jt.projects.gbmaterialapp.ui.main
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import jt.projects.gbmaterialapp.databinding.FragmentPictureOfTheDayBinding
 import jt.projects.gbmaterialapp.model.dto.PODServerResponseData
 import jt.projects.gbmaterialapp.ui.recycler.RecViewActivity
 import jt.projects.gbmaterialapp.ui.telescope.BottomNavigationActivity
+import jt.projects.gbmaterialapp.ui.textstyles.TextStylesActivity
 import jt.projects.gbmaterialapp.ui.tools.BottomNavigationDrawerFragment
 import jt.projects.gbmaterialapp.ui.tools.SettingsFragment
 import jt.projects.gbmaterialapp.ui.viewpager.ViewPagerActivity
@@ -30,7 +32,6 @@ import jt.projects.gbmaterialapp.util.TAG
 import jt.projects.gbmaterialapp.util.toast
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayData
 import jt.projects.gbmaterialapp.viewmodel.PictureOfTheDayViewModel
-import jt.projects.gbmaterialapp.viewmodel.ViewPagerAdapter
 import java.time.LocalDate
 
 
@@ -72,13 +73,23 @@ class PictureOfTheDayFragment : Fragment() {
         initChipGroup()
         initChipHD()
 
+
         binding.wikiInputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data =
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.wikiInputEditText.text.toString()}")
             })
         }
+        binding.behaviourButton.setOnClickListener {
+            try {
+                requireActivity().findViewById<TextView>(R.id.bottomSheetDescription).typeface =
+                    Typeface.createFromAsset(requireActivity().assets, "fonts/Christmas.ttf")
+            } catch (e: java.lang.Exception) {
+                toast(e.message)
+            }
+        }
         setBottomAppBar()
+        startActivity(Intent(context, TextStylesActivity::class.java))
     }
 
     private fun initChipHD() {
@@ -160,6 +171,12 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
 
+            R.id.app_bar_bottom_text_styles -> {
+                activity?.let {
+                    startActivity(Intent(it, TextStylesActivity::class.java))
+                }
+            }
+
             R.id.app_bar_bottom_rec_view -> {
                 activity?.let {
                     startActivity(Intent(it, RecViewActivity::class.java))
@@ -173,7 +190,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
 
             R.id.app_bar_fav -> {
-                activity?.let {startActivity(Intent(it, ViewPagerActivity::class.java))}
+                activity?.let { startActivity(Intent(it, ViewPagerActivity::class.java)) }
             }
 
             R.id.app_bar_theme -> (activity as MainActivity).showThemeDialog()

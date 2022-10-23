@@ -9,6 +9,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/app_bar_bottom_text_styles"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/favourite"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/app_bar_bottom_rec_view"
         android:icon="@android:drawable/ic_dialog_dialer"
         android:title="@string/favourite"

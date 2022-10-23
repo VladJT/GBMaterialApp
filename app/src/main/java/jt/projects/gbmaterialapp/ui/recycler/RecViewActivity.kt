@@ -28,9 +28,9 @@ class RecViewActivity : AppCompatActivity() {
 
 
     val data : ArrayList<Pair<Data, Boolean>> = arrayListOf(
-        Pair(Data(1, Data.TYPE_HEADER, "Hello, world!"), false),
-        Pair(Data(2, Data.TYPE_EARTH, "Earth"),false),
-        Pair(Data(3, Data.TYPE_MARS, "Mars", "HelloHelloHello"),false)
+        Pair(Data(Data.TYPE_HEADER, "Hello, world!"), false),
+        Pair(Data(Data.TYPE_EARTH, "Earth"),false),
+        Pair(Data(Data.TYPE_MARS, "Mars", "HelloHelloHello"),false)
     )
 
 
