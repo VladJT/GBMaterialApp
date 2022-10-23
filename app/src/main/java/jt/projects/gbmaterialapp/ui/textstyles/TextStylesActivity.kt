@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.*
 import android.text.style.*
 import androidx.appcompat.app.AppCompatActivity
-import jt.projects.gbmaterialapp.R
 import jt.projects.gbmaterialapp.databinding.ActivityTextstylesBinding
 
 
@@ -51,11 +50,19 @@ class TextStylesActivity : AppCompatActivity() {
         binding.spanTextView.text = spannable
 
 
-        val spannable2 = SpannableString("Использование\n флага SPAN_EXCLUSIVE_INCLUSIVE\n не включит пробел слева, но включит символ справа")
+        // paragraps span
+        val spannable2 =
+            SpannableString("Список\nраз\nдва\n")
         spannable2.setSpan(
-            QuoteSpan(R.color.indigo_dark),
-            0, 13,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            BulletSpan(20, Color.RED, 10),
+            7, 10,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannable2.setSpan(
+            BulletSpan(20, Color.RED, 10),
+            11, spannable2.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         binding.spanTextView2.text = spannable2
 
