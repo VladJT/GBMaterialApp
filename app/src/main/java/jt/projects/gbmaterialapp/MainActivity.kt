@@ -1,6 +1,7 @@
 package jt.projects.gbmaterialapp
 
 import android.os.Bundle
+import androidx.annotation.UiThread
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import jt.projects.gbmaterialapp.databinding.ActivityMainBinding
@@ -18,10 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         SharedPref.initSharedPreferencesContext(applicationContext)
         setTheme(SharedPref.getData().theme)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance())
                 .commitNow()
         }
+
       //  val car = DaggerCarsComponent.builder().build().getCar()
        // Log.d(TAG, car.getType())
     }

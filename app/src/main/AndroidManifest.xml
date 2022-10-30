@@ -13,10 +13,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/GBMaterialApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="jt.projects.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,7 @@
         <activity android:name=".ui.telescope.BottomNavigationActivity"/>
         <activity android:name=".ui.recycler.RecViewActivity"/>
         <activity android:name=".ui.textstyles.TextStylesActivity"/>
+        <activity android:name=".MainActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

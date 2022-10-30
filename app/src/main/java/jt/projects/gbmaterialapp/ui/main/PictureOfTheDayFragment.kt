@@ -89,7 +89,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
         }
         setBottomAppBar()
-        startActivity(Intent(context, TextStylesActivity::class.java))
+       // startActivity(Intent(context, TextStylesActivity::class.java))
     }
 
     private fun initChipHD() {
